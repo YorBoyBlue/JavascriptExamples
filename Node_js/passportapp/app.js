@@ -62,6 +62,11 @@ app.use(function(req, resp, next) {
 	next();
 });
 
+app.get('*', function(req, resp, next) {
+	resp.locals.user = req.user || null;
+	next();
+});
+
 // Define Routes
 app.use('/', routes);
 app.use('/users', users);

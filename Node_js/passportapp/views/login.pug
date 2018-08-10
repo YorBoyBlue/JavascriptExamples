@@ -1,7 +1,9 @@
 include includes/header.pug
 
 .container
-	form.form-signin
+	br
+	!= messages()
+	form.form-signin(method='post', action='/users/login')
 		img.mb-4(src='../../assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
 		h1.h3.mb-3.font-weight-normal.text-center User Login
 		label.sr-only() User Name

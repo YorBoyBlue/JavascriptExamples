@@ -1,8 +1,9 @@
 include includes/header.pug
 
 .container
+	br
+	!= messages()
 	if errors
-		br
 		each error, i in errors
 			.alert.alert-danger #{error.msg}
 

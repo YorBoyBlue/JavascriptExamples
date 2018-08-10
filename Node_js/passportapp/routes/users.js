@@ -51,25 +51,86 @@ router.post('/register', function(req, resp) {
 			name: name,
 			email: email,
 			username: username,
-			password: password,
-			password2: password2			
+			password: password		
 		};
 
-		db.users.insert(newUser, function(err, doc) {
-			if(err) {
-				res.send(err);
-			} else {
-				console.log('User Added!');
+		bcrypt.genSalt(10, function(err, salt) {
+			bcrypt.hash(newUser.password, salt, function(err, hash) {
+				newUser.password = hash;
 
-				// Success Message
-				req.flash('success', 'You are registered and can now log in');
+				db.users.insert(newUser, function(err, doc) {
+					if(err) {
+						res.send(err);
+					} else {
+						console.log('User Added!');
 
-				// Redirect after register
-				resp.location('/');
-				resp.redirect('/');
-			}
+						// Success Message
+						req.flash('success', 'You are registered and can now log in');
+
+						// Redirect after register
+						resp.location('/users/login');
+						resp.redirect('/users/login');
+					}
+				});
+			});
 		});
 	}
+});
+
+passport.serializeUser(function(user, done) {
+	done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+	db.users.findOne(
+		{
+			_id: mongojs.ObjectId(id)
+		},
+		function(err, user) {
+			done(err, user);
+		}
+	);
+});
+
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+		db.users.findOne({username: username}, function(err, user) {
+			if(err) {
+				return done(err);
+			}
+			if(!user) {
+				return done(null, false, {message: 'Incorrect Username'});
+			}
+
+			bcrypt.compare(password, user.password, function(err, found) {				
+				if(err) {
+					return done(err);
+				}
+				if(found) {
+					return done(null, user);
+				} else {
+					return done(null, false, {message: 'Incorrect Password'});
+				}
+			});
+		});
+	}
+));
+
+router.post('/login', 
+	passport.authenticate(
+		'local', 
+		{ 	successRedirect: '/',
+			failureRedirect: '/users/login',
+			failureFlash: 'Invalid Username or Password'}), 
+		function(req, resp) {
+			console.log('Auth Successful');
+			resp.redirect('/');
+});
+
+router.get('/logout', function(req, resp) {
+	req.logout();
+	req.flash('success', 'You have logged out')
+	resp.redirect('/users/login');
 });
 
 module.exports = router;
