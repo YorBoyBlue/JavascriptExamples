@@ -1,0 +1,21 @@
+doctype html
+html
+	head
+		title Passport App
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+
+	body
+		header
+			nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+				a.navbar-brand(href='/') Passport App
+				button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+				#navbarsExampleDefault.collapse.navbar-collapse
+					ul.navbar-nav.mr-auto
+						li.nav-item
+							a.nav-link(href='/') Home 
+						li.nav-item
+							a.nav-link(href='/users/register') Register
+						li.nav-item
+							a.nav-link(href='/users/login') Login

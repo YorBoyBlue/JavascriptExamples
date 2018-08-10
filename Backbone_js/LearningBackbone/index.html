@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Backbone Learning</title>
+  </head>
+  <body>  		
+  		<ul id="container"></ul>
+
+
+
+	    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	    <script type="text/javascript" src="underscore-min.js"></script>
+	    <script type="text/javascript" src="backbone-min.js"></script>
+
+	    <script id="songTemplate" type="text/html">
+	    	<%= title %>
+	    	<button>Listen</button>
+	    	<% if (plays >= 1000) { %>
+	    		<span class="popular">Popular</span>
+	    	<% } %>
+	    </script>
+
+	    <script type="text/javascript" src="BackboneTest.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+include includes/header.pug
+
+.container
+	form.form-signin
+		img.mb-4(src='../../assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
+		h1.h3.mb-3.font-weight-normal.text-center User Registration
+		label.sr-only() Name
+		input.form-control(type='text', name='name', placeholder='Name', required='', autofocus='')
+		br
+		label.sr-only() Email
+		input.form-control(type='email', name='password', placeholder='Email', required='')
+		br
+		label.sr-only() User Name
+		input.form-control(type='text', name='username', placeholder='User Name', required='')
+		br
+		label.sr-only() Password
+		input.form-control(type='password', name='password', placeholder='Password', required='')
+		br
+		label.sr-only() Confirm Password
+		input.form-control(type='password', name='password2', placeholder='Password Confirm', required='')
+		br
+		p
+			| Have Account? 
+			a(href='/users/login') Login
+		button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+	
+include includes/footer.pug
+
+link(rel='stylesheet', href='/css/signin.css')
