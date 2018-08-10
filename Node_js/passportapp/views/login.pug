@@ -5,10 +5,10 @@ include includes/header.pug
 		img.mb-4(src='../../assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
 		h1.h3.mb-3.font-weight-normal.text-center User Login
 		label.sr-only() User Name
-		input.form-control(type='text', name='username', placeholder='User Name', required='', autofocus='')
+		input.form-control(type='text', name='username', placeholder='User Name', autofocus='')
 		br
 		label.sr-only() Password
-		input.form-control(type='password', name='password', placeholder='Password', required='')
+		input.form-control(type='password', name='password', placeholder='Password' autocomplete="off")
 		p
 			| No Account? 
 			a(href='/users/register') Register

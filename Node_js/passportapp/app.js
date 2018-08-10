@@ -50,7 +50,7 @@ app.use(expressValidator({
 		return {
 			param: formParam,
 			msg: msg,
-			value: vlaue
+			value: value
 		};
 	}
 }));

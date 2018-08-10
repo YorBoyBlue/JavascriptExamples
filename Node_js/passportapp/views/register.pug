@@ -1,23 +1,28 @@
 include includes/header.pug
 
 .container
-	form.form-signin
+	if errors
+		br
+		each error, i in errors
+			.alert.alert-danger #{error.msg}
+
+	form.form-signin(method='post', action='/users/register')
 		img.mb-4(src='../../assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
 		h1.h3.mb-3.font-weight-normal.text-center User Registration
 		label.sr-only() Name
-		input.form-control(type='text', name='name', placeholder='Name', required='', autofocus='')
+		input.form-control(type='text', value=name, name='name', placeholder='Name', autofocus='')
 		br
 		label.sr-only() Email
-		input.form-control(type='email', name='password', placeholder='Email', required='')
+		input.form-control(type='text', value=email, name='email', placeholder='Email')
 		br
 		label.sr-only() User Name
-		input.form-control(type='text', name='username', placeholder='User Name', required='')
+		input.form-control(type='text', value=username, name='username', placeholder='User Name')
 		br
 		label.sr-only() Password
-		input.form-control(type='password', name='password', placeholder='Password', required='')
+		input.form-control(type='password', value=password, name='password', placeholder='Password', autocomplete="off")
 		br
 		label.sr-only() Confirm Password
-		input.form-control(type='password', name='password2', placeholder='Password Confirm', required='')
+		input.form-control(type='password', value=password2, name='password2', placeholder='Password Confirm', autocomplete="off")
 		br
 		p
 			| Have Account? 
